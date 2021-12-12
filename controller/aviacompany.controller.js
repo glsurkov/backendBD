@@ -1,4 +1,5 @@
 const Aviacompany = require("../models/Aviacompany");
+const Airport = require("../models/Airport");
 
 
 class AviacompanyController{
@@ -13,31 +14,48 @@ class AviacompanyController{
         }
     }
 
-/*    async updateAviacompany(req,res){
+    async getAviacompany(req,res){
         try{
-            const aviacompany_id = req.params.id;
-            const {company_name,company_phone,company_raiting} = req.body;
-            const Company = await db.query(`UPDATE aviacompanies SET company_name = $1, company_phone = $2, company_raiting = $3 WHERE country_name = $4`,[company_name,company_phone,company_raiting,aviacompany_id]);
-            res.json(Company.rows[0]);
+            const Aviacompanies = await Aviacompany.findAll();
+            res.json(Aviacompanies)
         }catch(e)
         {
             console.log(e);
         }
-    }*/
+    }
+
+    async updateAviacompany(req,res){
+        try{
+            const company_id = req.query.company_id;
+            const newAviacompany = await Aviacompany.update(req.body,
+                {
+                    where:{
+                        company_id: company_id
+                    }
+                }
+            )
+            res.status(200).json(newAviacompany);
+
+        }catch(e)
+        {
+            res.status(500).json({message:e});
+            console.log(e);
+        }
+    }
 
 
     async deleteAviacompany(req,res){
         try{
-            const aviacompany_id = req.params.id;
+            const aviacompany_id = req.query.company_id;
             if (!aviacompany_id)
             {
                 res.status(400).json({message:"Id не указан"});
 
             }
-            const Company = await Aviacompany.delete({where:{
+            await Aviacompany.destroy({where:{
                 company_id:aviacompany_id
                 }});
-            return res.json(Company);
+            return res.status(200).json({message:"Успешно удалена"})
         }catch(e)
         {
             console.log("error");

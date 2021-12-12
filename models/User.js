@@ -16,7 +16,20 @@ const User = db.define('user',{
         },
         password:{
             type:Sequelize.STRING,
-            allowNull:false
+            allowNull:false,
+        },
+        role:{
+            type:Sequelize.STRING,
+            allowNull:false,
+            defaultValue:'user'
+        },
+        balance:{
+            type:Sequelize.INTEGER,
+            allowNull:false,
+            defaultValue:0,
+            validate:{
+                min:0
+            }
         }
     },
     {

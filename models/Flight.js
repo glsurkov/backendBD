@@ -18,7 +18,7 @@ const Flight = db.define('flight',{
             }
         },
         departure_date:{
-            type:Sequelize.DATE,
+            type:Sequelize.DATEONLY,
             allowNull:false,
         },
         departure_time:{
@@ -33,7 +33,7 @@ const Flight = db.define('flight',{
             }
         },
         arrival_date:{
-            type:Sequelize.DATE,
+            type:Sequelize.DATEONLY,
             allowNull:false,
         },
         arrival_time:{
@@ -50,10 +50,22 @@ const Flight = db.define('flight',{
         tickets_in_stock:{
             type:Sequelize.INTEGER,
             allowNull:false,
+            validate:{
+                min:0
+            }
         },
         ticket_price:{
             type:Sequelize.INTEGER,
             allowNull:false
+        },
+        active:{
+            type:Sequelize.INTEGER,
+            allowNull:false,
+            defaultValue:1,
+            validate: {
+                min: 0,
+                max: 1
+            }
         }
     },
     {

@@ -1,4 +1,5 @@
 const Country = require("../models/Country");
+const Hotel = require("../models/Hotel");
 
 
 class CountryController{
@@ -14,34 +15,51 @@ class CountryController{
         }
     }
 
-/*
-    async updateCountry(req,res){
+
+    async getCountries(req,res){
         try{
-            const country_name = req.params.id;
-            const {population,capital_city} = req.body;
-            const Country = await db.query(`UPDATE countries SET population = $1, capital_city = $2 WHERE country_name = $3`,[population,capital_city,country_name]);
-            res.json(Country.rows[0]);
+            const Countries = await Country.findAll();
+            res.json(Countries);
         }catch(e)
         {
+            res.status(500).json(e);
             console.log(e);
         }
     }
-*/
+
+    async updateCountries(req,res){
+        try{
+            const country_name = req.body.country_name;
+            const newCountry = await Country.update(req.body,
+                {
+                    where:{
+                        country_name:country_name
+                    }
+                }
+            )
+            res.status(200).json(newCountry);
+
+        }catch(e)
+        {
+            res.status(500).json({message:e});
+            console.log(e);
+        }
+    }
 
 
     async deleteCountry(req,res){
         try{
-            const country_name = req.params.id;
+            const country_name = req.query.country_name;
             if (!country_name)
             {
                 res.status(400).json({message:"Id не указан"});
 
             }
-            const Country = await Country.delete({where:
+            await Country.destroy({where:
                     {
                         country_name: country_name
                     }})
-            return res.json(Country);
+            return res.status(200).json({message:"Успешно удален"});
         }catch(e)
         {
             console.log("error");

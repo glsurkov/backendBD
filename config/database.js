@@ -6,7 +6,6 @@ module.exports = new Sequelize('airbook3','postgres','12345678',{
     pool: {
         max: 10,
         min: 0,
-        acquire:30000,
         idle:10000
     },
 })

@@ -9,7 +9,8 @@ const Airport = db.define('airport',{
         },
         airport_name:{
             type:Sequelize.STRING,
-            allowNull:false
+            allowNull:false,
+            unique:true
         },
         airport_country:{
             type:Sequelize.STRING,

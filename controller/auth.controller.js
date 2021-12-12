@@ -3,12 +3,14 @@ const bcrypt = require('bcryptjs');
 const {validationResult} = require('express-validator');
 const jwt = require('jsonwebtoken')
 const {secret} = require("../config/config")
+const sequelize = require("sequelize")
 
-const generateAccessToken = (id) => {
+const generateAccessToken = (id,role) => {
     const payload = {
-        id
+        id,
+        role
     }
-    return jwt.sign(payload, secret, {expiresIn: "24h"})
+    return jwt.sign(payload, secret, {expiresIn: "12h"})
 }
 
 class authContoller {
@@ -26,10 +28,16 @@ class authContoller {
             if (Object.keys(candidate).length !== 0) {
                 return res.status(400).json({message:"Пользователь с таким именем уже существует"});
             }
+            let role;
+            if(username === "admin" && password === "admin")
+            {
+                role = 'admin';
+            }
             const hashPassword = bcrypt.hashSync(password,7);
             await User.create({
                 username:username,
-                password:hashPassword});
+                password:hashPassword,
+                role:role});
             return res.json({message:"Пользователь успешно создан"});
         }
         catch(e)
@@ -44,7 +52,6 @@ class authContoller {
             const user = await User.findAll({where:{
                     username:username,
                 }});
-            console.log(user[0].user_id)
             if(Object.keys(user).length === 0)
             {
                 return res.status(400).json({message:`Пользователь с ${username} не найден`});
@@ -54,9 +61,9 @@ class authContoller {
             {
                 return res.status(400).json({message:'Введен неверный пароль'});
             }
-            const token = generateAccessToken(user[0].user_id);
-            const id = user[0].user_id;
-            return res.json({token:token,id:id})
+            const token = generateAccessToken(user[0].user_id,user[0].role);
+            const role = user[0].role;
+            return res.json({token:token,role:role})
 
         }catch(e)
         {
@@ -77,13 +84,13 @@ class authContoller {
 
         async getUser(req,res){
             try{
-                const id = req.query.id;
+                const id = req.info.id;
                 const user = await User.findOne({
                     where:
                         {
                           user_id : +id
                         },
-                    attributes:['username','contact_number']
+                    attributes:['username','contact_number','role','balance','user_id']
                 })
                 console.log(user);
                 res.json(user)
@@ -92,6 +99,28 @@ class authContoller {
                 console.log(e);
                 res.status(400).json({message:"Can't get User"})
             }
+        }
+
+        async addBalance(req,res){
+            try{
+                const id = req.info.id;
+                const value = req.body.value;
+                await User.update({
+                    balance : sequelize.literal(`balance + ${value}`)
+                },
+                    {
+                        where:{
+                            user_id : id
+                        }
+                    })
+
+                res.status(200).json({message:"Balance is updated"})
+
+            }catch(e)
+            {
+                res.status(500).json({message:"ERROR, BALANCE ISN'T UPDATED"})
+            }
+
         }
 }
 

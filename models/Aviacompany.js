@@ -10,14 +10,11 @@ const Aviacompany = db.define('aviacompany',{
         company_name:{
             type:Sequelize.STRING,
             allowNull:false,
+            unique:true
         },
         company_phone:{
             type:Sequelize.STRING,
             allowNull:false,
-        },
-        company_raiting:{
-            type:Sequelize.INTEGER,
-            allowNull:false
         }
     },
     {

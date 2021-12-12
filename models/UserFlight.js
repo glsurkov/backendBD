@@ -4,9 +4,13 @@ const User = require('./User')
 const Flight = require('./Flight')
 
 const UserFlight = db.define('users_flight',{
+        flight_order:{
+            type:Sequelize.INTEGER,
+            autoIncrement:true,
+            primaryKey:true,
+        },
         user_id:{
             type:Sequelize.INTEGER,
-            primaryKey:true,
             references:{
                 model:User,
                 key:'user_id'
@@ -14,7 +18,6 @@ const UserFlight = db.define('users_flight',{
         },
         flight_id:{
             type:Sequelize.INTEGER,
-            primaryKey:true,
             references:{
                 model:Flight,
                 key:'flight_id'

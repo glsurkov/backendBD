@@ -14,31 +14,47 @@ class AirportController{
         }
     }
 
-/*    async updateAirport(req,res){
+    async getAirports(req,res){
         try{
-            const airport_id = req.params.id;
-            const {airport_name,airport_country,airport_city} = req.body;
-            const Airport = await db.query(`UPDATE airports SET airport_name = $1, airport_country = $2, airport_city = $3 WHERE airport_id = $4`,[airport_name,airport_country,airport_city,airport_id]);
-            res.json(Airport.rows[0]);
+            const Airports = await Airport.findAll();
+            res.json(Airports)
         }catch(e)
         {
             console.log(e);
         }
-    }*/
+    }
+    async updateAirport(req,res){
+        try{
+            const airport_id = req.query.airport_id;
+            const newAirport = await Airport.update(req.body,
+                {
+                where:{
+                    airport_id: airport_id
+                }
+                }
+            )
+            res.status(200).json(newAirport);
+
+        }catch(e)
+        {
+            res.status(500).json({message:e});
+            console.log(e);
+        }
+    }
 
 
     async deleteAirport(req,res){
         try{
-            const airport_id = req.params.id;
+            const airport_id = req.query.airport_id;
             if (!airport_id)
             {
                 res.status(400).json({message:"Id не указан"});
 
             }
-            const Airport = await Airport.delete({where:{
+            await Airport.destroy({where:{
                 airport_id:airport_id
                 }});
-            return res.json(Airport);
+            return res.status(200);
         }catch(e)
         {
             console.log("error");

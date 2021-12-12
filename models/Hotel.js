@@ -22,15 +22,28 @@ const Hotel = db.define('hotel',{
         },
         rooms_in_stock:{
             type:Sequelize.INTEGER,
-            allowNull:false
+            allowNull:false,
+            validate:{
+                min:0
+            }
         },
         hotel_name:{
             type:Sequelize.STRING,
-            allowNull:false
+            allowNull:false,
+            unique:true
         },
         hotel_city:{
             type:Sequelize.STRING,
             allowNull:false
+        },
+        available:{
+            type:Sequelize.INTEGER,
+            allowNull:false,
+            defaultValue:1,
+            validate:{
+                min:0,
+                max:1
+            }
         }
     },
     {
