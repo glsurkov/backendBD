@@ -7,10 +7,11 @@ class AirportController{
 /*            const {airport_name,airport_country,airport_city} = req.body;*/
             console.log(req.body);
             const newAirport = await Airport.create(req.body);
-            res.json(newAirport);
+            res.status(200).json(newAirport);
         }catch(e)
         {
             console.log(e);
+            res.status(400).json({message:'Error'})
         }
     }
 

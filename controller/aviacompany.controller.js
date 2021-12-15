@@ -7,10 +7,11 @@ class AviacompanyController{
         try{
 /*            const {company_name,company_phone,company_raiting} = req.body;*/
             const newAviacompany = await Aviacompany.create(req.body);
-            res.json(newAviacompany);
+            res.status(200).json(newAviacompany);
         }catch(e)
         {
             console.log(e);
+            res.status(400).json({message:"Error"})
         }
     }
 

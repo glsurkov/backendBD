@@ -45,9 +45,10 @@ class FlightController {
                 }
             )
 
-            res.json(newFlight);
+            res.status(200).json(newFlight);
 
         } catch (e) {
+            res.status(400).json({message:'Error'})
             console.log(e);
         }
 
@@ -70,13 +71,13 @@ class FlightController {
                             model: Airport,
                             required:true,
                             as:'departure_airport',
-                            attributes:['airport_name','airport_country']
+                            attributes:['airport_name','airport_country','airport_city']
                         },
                         {
                             model: Airport,
                             required:true,
                             as:'arrival_airport',
-                            attributes:['airport_name','airport_country']
+                            attributes:['airport_name','airport_country','airport_city']
                         },
                         {
                             model:Aviacompany,
@@ -95,13 +96,13 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country']
+                                attributes: ['airport_name', 'airport_country','airport_city']
                             },
                             {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country']
+                                attributes: ['airport_name', 'airport_country','airport_city']
                             },
                             {
                                 model: Aviacompany,
@@ -123,7 +124,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport,
                                     airport_country: flight_params.departure_country
@@ -133,7 +134,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country']
+                                attributes: ['airport_name', 'airport_country','airport_city']
                             },
                             {
                                 model: Aviacompany,
@@ -152,7 +153,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport
                                 }
@@ -161,7 +162,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country']
+                                attributes: ['airport_name', 'airport_country','airport_city']
                             },
                             {
                                 model: Aviacompany,
@@ -180,7 +181,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.departure_country
                                 }
@@ -189,7 +190,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country']
+                                attributes: ['airport_name', 'airport_country','airport_city']
                             },
                             {
                                 model: Aviacompany,
@@ -208,13 +209,13 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                             },
                             {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.arrival_airport,
                                     airport_country: flight_params.arrival_country
@@ -237,13 +238,13 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                             },
                             {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.arrival_airport,
                                 }
@@ -265,13 +266,13 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                             },
                             {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country
                                 }
@@ -293,13 +294,13 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                             },
                             {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.arrival_airport
                                 }
@@ -324,13 +325,13 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                             },
                             {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country
                                 }
@@ -355,7 +356,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport
                                 }
@@ -364,7 +365,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                             },
                             {
                                 model: Aviacompany,
@@ -386,7 +387,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.departure_country
                                 }
@@ -395,12 +396,12 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                             },
                             {
                                 model: Aviacompany,
                                 required: true,
-                                attributes: ['company_name'],
+                                attributes: ['company_name','airport_city'],
                                 where: {
                                     company_name: flight_params.company_name
                                 }
@@ -417,7 +418,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport
                                 }
@@ -426,7 +427,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.arrival_aiport
                                 }
@@ -448,7 +449,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.departure_country
                                 }
@@ -457,7 +458,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.arrival_airport
                                 }
@@ -479,7 +480,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport
                                 }
@@ -488,7 +489,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country
                                 }
@@ -510,7 +511,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.departure_country
                                 }
@@ -519,7 +520,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country
                                 }
@@ -541,13 +542,13 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                             },
                             {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country,
                                     airport_name: flight_params.arrival_airport
@@ -573,7 +574,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport,
                                     airport_country: flight_params.departure_country
@@ -604,7 +605,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport
                                 }
@@ -638,7 +639,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.departure_country
                                 }
@@ -647,7 +648,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country
                                 }
@@ -672,7 +673,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.departure_country
                                 }
@@ -681,7 +682,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.arrival_airport
                                 }
@@ -706,7 +707,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport
                                 }
@@ -715,7 +716,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country
                                 }
@@ -740,7 +741,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport
                                 }
@@ -749,7 +750,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country,
                                     airport_name: flight_params.arrival_airport
@@ -772,7 +773,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.departure_country
                                 }
@@ -804,7 +805,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport,
                                     airport_country: flight_params.departure_country
@@ -814,7 +815,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.arrival_airport
                                 }
@@ -836,7 +837,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airpprt_name: flight_params.departure_airport,
                                     airport_country: flight_params.departure_country
@@ -846,7 +847,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country
                                 }
@@ -868,7 +869,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport
                                 }
@@ -877,7 +878,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country,
                                     airport_name: flight_params.arrival_airport
@@ -903,7 +904,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.departure_country
                                 }
@@ -912,7 +913,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country,
                                     airport_name: flight_params.arrival_airport
@@ -938,7 +939,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport,
                                     airport_country: flight_params.departure_country
@@ -948,7 +949,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.arrival_airport
                                 }
@@ -973,7 +974,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.departure_country,
                                     airport_name: flight_params.departure_airport
@@ -983,7 +984,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country
                                 }
@@ -1008,7 +1009,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport,
                                     airport_country: flight_params.departure_country
@@ -1018,7 +1019,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country,
                                     airport_name: flight_params.arrival_airport
@@ -1041,7 +1042,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_name: flight_params.departure_airport,
                                     airport_country: flight_params.departure_country
@@ -1051,7 +1052,7 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                                 where: {
                                     airport_country: flight_params.arrival_country,
                                     airport_name: flight_params.arrival_airport
@@ -1077,13 +1078,13 @@ class FlightController {
                                 model: Airport,
                                 required: true,
                                 as: 'departure_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                             },
                             {
                                 model: Airport,
                                 required: true,
                                 as: 'arrival_airport',
-                                attributes: ['airport_name', 'airport_country'],
+                                attributes: ['airport_name', 'airport_country','airport_city'],
                             },
                             {
                                 model: Aviacompany,

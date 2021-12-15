@@ -15,9 +15,10 @@ class HotelController{
     async createHotel(req,res){
         try{
             const newHotel = await Hotel.create(req.body)
-            res.json(newHotel);
+            res.status(200).json(newHotel);
         }catch(e)
         {
+            res.status(400).json({message:"Error"})
             console.log(e);
         }
     }
@@ -135,7 +136,10 @@ class HotelController{
                     hotel_id:hotel_id,
                     image:req.file.filename
                 })
-                res.json(req.file)
+                res.status(200).json(req.file)
+            }else
+            {
+                res.status(400).json({message:'Not an image'})
             }
 
         }catch(e)
